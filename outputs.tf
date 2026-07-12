@@ -1,3 +1,7 @@
+output "windows_virtual_machine_scale_sets_id" {
+  description = "Map of id values across all windows_virtual_machine_scale_sets, keyed the same as var.windows_virtual_machine_scale_sets"
+  value       = { for k, v in azurerm_windows_virtual_machine_scale_set.windows_virtual_machine_scale_sets : k => v.id }
+}
 output "windows_virtual_machine_scale_sets_additional_capabilities" {
   description = "Map of additional_capabilities values across all windows_virtual_machine_scale_sets, keyed the same as var.windows_virtual_machine_scale_sets"
   value       = { for k, v in azurerm_windows_virtual_machine_scale_set.windows_virtual_machine_scale_sets : k => v.additional_capabilities }
