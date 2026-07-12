@@ -201,37 +201,37 @@ EOT
     capacity_reservation_group_id                     = optional(string)
     overprovision                                     = optional(bool) # Default: true
     zones                                             = optional(set(string))
-    network_interface = object({
+    network_interface = list(object({
       auxiliary_mode                = optional(string)
       auxiliary_sku                 = optional(string)
       dns_servers                   = optional(list(string))
       enable_accelerated_networking = optional(bool) # Default: false
       enable_ip_forwarding          = optional(bool) # Default: false
-      ip_configuration = object({
+      ip_configuration = list(object({
         application_gateway_backend_address_pool_ids = optional(set(string))
         application_security_group_ids               = optional(set(string))
         load_balancer_backend_address_pool_ids       = optional(set(string))
         load_balancer_inbound_nat_rules_ids          = optional(set(string))
         name                                         = string
         primary                                      = optional(bool) # Default: false
-        public_ip_address = optional(object({
+        public_ip_address = optional(list(object({
           domain_name_label       = optional(string)
           idle_timeout_in_minutes = optional(number)
-          ip_tag = optional(object({
+          ip_tag = optional(list(object({
             tag  = string
             type = string
-          }))
+          })))
           name                = string
           public_ip_prefix_id = optional(string)
           version             = optional(string) # Default: "IPv4"
-        }))
+        })))
         subnet_id = optional(string)
         version   = optional(string) # Default: "IPv4"
-      })
+      }))
       name                      = string
       network_security_group_id = optional(string)
       primary                   = optional(bool) # Default: false
-    })
+    }))
     os_disk = object({
       caching = string
       diff_disk_settings = optional(object({
@@ -255,13 +255,13 @@ EOT
       sku       = string
       version   = string
     }))
-    secret = optional(object({
+    secret = optional(list(object({
       certificate = list(object({
         store = string
         url   = string
       }))
       key_vault_id = string
-    }))
+    })))
     scale_in = optional(object({
       force_deletion_enabled = optional(bool)   # Default: false
       rule                   = optional(string) # Default: "Default"
@@ -290,7 +290,7 @@ EOT
       tag                    = optional(string)
       version_id             = string
     })))
-    extension = optional(object({
+    extension = optional(list(object({
       auto_upgrade_minor_version = optional(bool) # Default: true
       automatic_upgrade_enabled  = optional(bool) # Default: false
       force_update_tag           = optional(string)
@@ -305,8 +305,8 @@ EOT
       settings                   = optional(string)
       type                       = string
       type_handler_version       = string
-    }))
-    data_disk = optional(object({
+    })))
+    data_disk = optional(list(object({
       caching                        = string
       create_option                  = optional(string) # Default: "Empty"
       disk_encryption_set_id         = optional(string)
@@ -317,7 +317,7 @@ EOT
       ultra_ssd_disk_iops_read_write = optional(number)
       ultra_ssd_disk_mbps_read_write = optional(number)
       write_accelerator_enabled      = optional(bool) # Default: false
-    }))
+    })))
     boot_diagnostics = optional(object({
       storage_account_uri = optional(string)
     }))
@@ -330,10 +330,10 @@ EOT
       enabled      = bool
       grace_period = optional(string)
     }))
-    additional_unattend_content = optional(object({
+    additional_unattend_content = optional(list(object({
       content = string
       setting = string
-    }))
+    })))
     additional_capabilities = optional(object({
       ultra_ssd_enabled = optional(bool) # Default: false
     }))
@@ -341,10 +341,10 @@ EOT
       enabled = bool
       timeout = optional(string) # Default: "PT5M"
     }))
-    winrm_listener = optional(object({
+    winrm_listener = optional(list(object({
       certificate_url = optional(string)
       protocol        = string
-    }))
+    })))
   }))
   validation {
     condition = alltrue([
@@ -357,7 +357,7 @@ EOT
   validation {
     condition = alltrue([
       for k, v in var.windows_virtual_machine_scale_sets : (
-        length(v.secret.certificate) >= 1
+        v.secret == null || alltrue([for item in v.secret : (length(item.certificate) >= 1)])
       )
     ])
     error_message = "Each certificate list must contain at least 1 items"
