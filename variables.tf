@@ -3,6 +3,8 @@ variable "windows_virtual_machine_scale_sets" {
 Map of windows_virtual_machine_scale_sets, attributes below
 Required:
     - admin_password
+    - admin_password_key_vault_id (alternative to admin_password - read from Key Vault instead)
+    - admin_password_key_vault_secret_name (alternative to admin_password - read from Key Vault instead)
     - admin_username
     - instances
     - location
@@ -51,6 +53,8 @@ Optional:
     - capacity_reservation_group_id
     - computer_name_prefix
     - custom_data
+    - custom_data_key_vault_id (alternative to custom_data - read from Key Vault instead)
+    - custom_data_key_vault_secret_name (alternative to custom_data - read from Key Vault instead)
     - do_not_run_extensions_on_overprovisioned_machines
     - edge_zone
     - enable_automatic_updates
@@ -164,6 +168,8 @@ EOT
 
   type = map(object({
     admin_password                                    = string
+    admin_password_key_vault_id                       = optional(string)
+    admin_password_key_vault_secret_name              = optional(string)
     admin_username                                    = string
     instances                                         = number
     location                                          = string
@@ -197,6 +203,8 @@ EOT
     edge_zone                                         = optional(string)
     do_not_run_extensions_on_overprovisioned_machines = optional(bool) # Default: false
     custom_data                                       = optional(string)
+    custom_data_key_vault_id                          = optional(string)
+    custom_data_key_vault_secret_name                 = optional(string)
     computer_name_prefix                              = optional(string)
     capacity_reservation_group_id                     = optional(string)
     overprovision                                     = optional(bool) # Default: true
