@@ -28,6 +28,10 @@ output "windows_virtual_machine_scale_sets_automatic_os_upgrade_policy" {
   description = "Map of automatic_os_upgrade_policy values across all windows_virtual_machine_scale_sets, keyed the same as var.windows_virtual_machine_scale_sets"
   value       = { for k, v in azurerm_windows_virtual_machine_scale_set.windows_virtual_machine_scale_sets : k => v.automatic_os_upgrade_policy if v.automatic_os_upgrade_policy != null && length(v.automatic_os_upgrade_policy) > 0 }
 }
+output "windows_virtual_machine_scale_sets_automatic_updates_enabled" {
+  description = "Map of automatic_updates_enabled values across all windows_virtual_machine_scale_sets, keyed the same as var.windows_virtual_machine_scale_sets"
+  value       = { for k, v in azurerm_windows_virtual_machine_scale_set.windows_virtual_machine_scale_sets : k => v.automatic_updates_enabled if v.automatic_updates_enabled != null }
+}
 output "windows_virtual_machine_scale_sets_boot_diagnostics" {
   description = "Map of boot_diagnostics values across all windows_virtual_machine_scale_sets, keyed the same as var.windows_virtual_machine_scale_sets"
   value       = { for k, v in azurerm_windows_virtual_machine_scale_set.windows_virtual_machine_scale_sets : k => v.boot_diagnostics if v.boot_diagnostics != null && length(v.boot_diagnostics) > 0 }
@@ -56,10 +60,6 @@ output "windows_virtual_machine_scale_sets_do_not_run_extensions_on_overprovisio
 output "windows_virtual_machine_scale_sets_edge_zone" {
   description = "Map of edge_zone values across all windows_virtual_machine_scale_sets, keyed the same as var.windows_virtual_machine_scale_sets"
   value       = { for k, v in azurerm_windows_virtual_machine_scale_set.windows_virtual_machine_scale_sets : k => v.edge_zone if v.edge_zone != null && length(v.edge_zone) > 0 }
-}
-output "windows_virtual_machine_scale_sets_enable_automatic_updates" {
-  description = "Map of enable_automatic_updates values across all windows_virtual_machine_scale_sets, keyed the same as var.windows_virtual_machine_scale_sets"
-  value       = { for k, v in azurerm_windows_virtual_machine_scale_set.windows_virtual_machine_scale_sets : k => v.enable_automatic_updates if v.enable_automatic_updates != null }
 }
 output "windows_virtual_machine_scale_sets_encryption_at_host_enabled" {
   description = "Map of encryption_at_host_enabled values across all windows_virtual_machine_scale_sets, keyed the same as var.windows_virtual_machine_scale_sets"
