@@ -4,7 +4,7 @@ output "windows_virtual_machine_scale_sets_id" {
 }
 output "windows_virtual_machine_scale_sets_additional_capabilities" {
   description = "Map of additional_capabilities values across all windows_virtual_machine_scale_sets, keyed the same as var.windows_virtual_machine_scale_sets"
-  value       = { for k, v in azurerm_windows_virtual_machine_scale_set.windows_virtual_machine_scale_sets : k => v.additional_capabilities if v.additional_capabilities != null && length(v.additional_capabilities) > 0 }
+  value       = { for k, v in azurerm_windows_virtual_machine_scale_set.windows_virtual_machine_scale_sets : k => one(v.additional_capabilities) if v.additional_capabilities != null && length(v.additional_capabilities) > 0 }
 }
 output "windows_virtual_machine_scale_sets_additional_unattend_content" {
   description = "Map of additional_unattend_content values across all windows_virtual_machine_scale_sets, keyed the same as var.windows_virtual_machine_scale_sets"
@@ -22,15 +22,15 @@ output "windows_virtual_machine_scale_sets_admin_username" {
 }
 output "windows_virtual_machine_scale_sets_automatic_instance_repair" {
   description = "Map of automatic_instance_repair values across all windows_virtual_machine_scale_sets, keyed the same as var.windows_virtual_machine_scale_sets"
-  value       = { for k, v in azurerm_windows_virtual_machine_scale_set.windows_virtual_machine_scale_sets : k => v.automatic_instance_repair if v.automatic_instance_repair != null && length(v.automatic_instance_repair) > 0 }
+  value       = { for k, v in azurerm_windows_virtual_machine_scale_set.windows_virtual_machine_scale_sets : k => one(v.automatic_instance_repair) if v.automatic_instance_repair != null && length(v.automatic_instance_repair) > 0 }
 }
 output "windows_virtual_machine_scale_sets_automatic_os_upgrade_policy" {
   description = "Map of automatic_os_upgrade_policy values across all windows_virtual_machine_scale_sets, keyed the same as var.windows_virtual_machine_scale_sets"
-  value       = { for k, v in azurerm_windows_virtual_machine_scale_set.windows_virtual_machine_scale_sets : k => v.automatic_os_upgrade_policy if v.automatic_os_upgrade_policy != null && length(v.automatic_os_upgrade_policy) > 0 }
+  value       = { for k, v in azurerm_windows_virtual_machine_scale_set.windows_virtual_machine_scale_sets : k => one(v.automatic_os_upgrade_policy) if v.automatic_os_upgrade_policy != null && length(v.automatic_os_upgrade_policy) > 0 }
 }
 output "windows_virtual_machine_scale_sets_boot_diagnostics" {
   description = "Map of boot_diagnostics values across all windows_virtual_machine_scale_sets, keyed the same as var.windows_virtual_machine_scale_sets"
-  value       = { for k, v in azurerm_windows_virtual_machine_scale_set.windows_virtual_machine_scale_sets : k => v.boot_diagnostics if v.boot_diagnostics != null && length(v.boot_diagnostics) > 0 }
+  value       = { for k, v in azurerm_windows_virtual_machine_scale_set.windows_virtual_machine_scale_sets : k => one(v.boot_diagnostics) if v.boot_diagnostics != null && length(v.boot_diagnostics) > 0 }
 }
 output "windows_virtual_machine_scale_sets_capacity_reservation_group_id" {
   description = "Map of capacity_reservation_group_id values across all windows_virtual_machine_scale_sets, keyed the same as var.windows_virtual_machine_scale_sets"
@@ -96,7 +96,7 @@ output "windows_virtual_machine_scale_sets_host_group_id" {
 }
 output "windows_virtual_machine_scale_sets_identity" {
   description = "Map of identity values across all windows_virtual_machine_scale_sets, keyed the same as var.windows_virtual_machine_scale_sets"
-  value       = { for k, v in azurerm_windows_virtual_machine_scale_set.windows_virtual_machine_scale_sets : k => v.identity if v.identity != null && length(v.identity) > 0 }
+  value       = { for k, v in azurerm_windows_virtual_machine_scale_set.windows_virtual_machine_scale_sets : k => one(v.identity) if v.identity != null && length(v.identity) > 0 }
 }
 output "windows_virtual_machine_scale_sets_instances" {
   description = "Map of instances values across all windows_virtual_machine_scale_sets, keyed the same as var.windows_virtual_machine_scale_sets"
@@ -124,7 +124,7 @@ output "windows_virtual_machine_scale_sets_network_interface" {
 }
 output "windows_virtual_machine_scale_sets_os_disk" {
   description = "Map of os_disk values across all windows_virtual_machine_scale_sets, keyed the same as var.windows_virtual_machine_scale_sets"
-  value       = { for k, v in azurerm_windows_virtual_machine_scale_set.windows_virtual_machine_scale_sets : k => v.os_disk if v.os_disk != null && length(v.os_disk) > 0 }
+  value       = { for k, v in azurerm_windows_virtual_machine_scale_set.windows_virtual_machine_scale_sets : k => one(v.os_disk) if v.os_disk != null && length(v.os_disk) > 0 }
 }
 output "windows_virtual_machine_scale_sets_overprovision" {
   description = "Map of overprovision values across all windows_virtual_machine_scale_sets, keyed the same as var.windows_virtual_machine_scale_sets"
@@ -132,7 +132,7 @@ output "windows_virtual_machine_scale_sets_overprovision" {
 }
 output "windows_virtual_machine_scale_sets_plan" {
   description = "Map of plan values across all windows_virtual_machine_scale_sets, keyed the same as var.windows_virtual_machine_scale_sets"
-  value       = { for k, v in azurerm_windows_virtual_machine_scale_set.windows_virtual_machine_scale_sets : k => v.plan if v.plan != null && length(v.plan) > 0 }
+  value       = { for k, v in azurerm_windows_virtual_machine_scale_set.windows_virtual_machine_scale_sets : k => one(v.plan) if v.plan != null && length(v.plan) > 0 }
 }
 output "windows_virtual_machine_scale_sets_platform_fault_domain_count" {
   description = "Map of platform_fault_domain_count values across all windows_virtual_machine_scale_sets, keyed the same as var.windows_virtual_machine_scale_sets"
@@ -164,11 +164,11 @@ output "windows_virtual_machine_scale_sets_resource_group_name" {
 }
 output "windows_virtual_machine_scale_sets_rolling_upgrade_policy" {
   description = "Map of rolling_upgrade_policy values across all windows_virtual_machine_scale_sets, keyed the same as var.windows_virtual_machine_scale_sets"
-  value       = { for k, v in azurerm_windows_virtual_machine_scale_set.windows_virtual_machine_scale_sets : k => v.rolling_upgrade_policy if v.rolling_upgrade_policy != null && length(v.rolling_upgrade_policy) > 0 }
+  value       = { for k, v in azurerm_windows_virtual_machine_scale_set.windows_virtual_machine_scale_sets : k => one(v.rolling_upgrade_policy) if v.rolling_upgrade_policy != null && length(v.rolling_upgrade_policy) > 0 }
 }
 output "windows_virtual_machine_scale_sets_scale_in" {
   description = "Map of scale_in values across all windows_virtual_machine_scale_sets, keyed the same as var.windows_virtual_machine_scale_sets"
-  value       = { for k, v in azurerm_windows_virtual_machine_scale_set.windows_virtual_machine_scale_sets : k => v.scale_in if v.scale_in != null && length(v.scale_in) > 0 }
+  value       = { for k, v in azurerm_windows_virtual_machine_scale_set.windows_virtual_machine_scale_sets : k => one(v.scale_in) if v.scale_in != null && length(v.scale_in) > 0 }
 }
 output "windows_virtual_machine_scale_sets_secret" {
   description = "Map of secret values across all windows_virtual_machine_scale_sets, keyed the same as var.windows_virtual_machine_scale_sets"
@@ -192,11 +192,11 @@ output "windows_virtual_machine_scale_sets_source_image_id" {
 }
 output "windows_virtual_machine_scale_sets_source_image_reference" {
   description = "Map of source_image_reference values across all windows_virtual_machine_scale_sets, keyed the same as var.windows_virtual_machine_scale_sets"
-  value       = { for k, v in azurerm_windows_virtual_machine_scale_set.windows_virtual_machine_scale_sets : k => v.source_image_reference if v.source_image_reference != null && length(v.source_image_reference) > 0 }
+  value       = { for k, v in azurerm_windows_virtual_machine_scale_set.windows_virtual_machine_scale_sets : k => one(v.source_image_reference) if v.source_image_reference != null && length(v.source_image_reference) > 0 }
 }
 output "windows_virtual_machine_scale_sets_spot_restore" {
   description = "Map of spot_restore values across all windows_virtual_machine_scale_sets, keyed the same as var.windows_virtual_machine_scale_sets"
-  value       = { for k, v in azurerm_windows_virtual_machine_scale_set.windows_virtual_machine_scale_sets : k => v.spot_restore if v.spot_restore != null && length(v.spot_restore) > 0 }
+  value       = { for k, v in azurerm_windows_virtual_machine_scale_set.windows_virtual_machine_scale_sets : k => one(v.spot_restore) if v.spot_restore != null && length(v.spot_restore) > 0 }
 }
 output "windows_virtual_machine_scale_sets_tags" {
   description = "Map of tags values across all windows_virtual_machine_scale_sets, keyed the same as var.windows_virtual_machine_scale_sets"
@@ -204,7 +204,7 @@ output "windows_virtual_machine_scale_sets_tags" {
 }
 output "windows_virtual_machine_scale_sets_termination_notification" {
   description = "Map of termination_notification values across all windows_virtual_machine_scale_sets, keyed the same as var.windows_virtual_machine_scale_sets"
-  value       = { for k, v in azurerm_windows_virtual_machine_scale_set.windows_virtual_machine_scale_sets : k => v.termination_notification if v.termination_notification != null && length(v.termination_notification) > 0 }
+  value       = { for k, v in azurerm_windows_virtual_machine_scale_set.windows_virtual_machine_scale_sets : k => one(v.termination_notification) if v.termination_notification != null && length(v.termination_notification) > 0 }
 }
 output "windows_virtual_machine_scale_sets_timezone" {
   description = "Map of timezone values across all windows_virtual_machine_scale_sets, keyed the same as var.windows_virtual_machine_scale_sets"
